@@ -25,4 +25,16 @@ public void GivenDistanceAndTime_ShouldReturnTotalFare()
         double expected = 5;
         Assertions.assertEquals(expected, fare);
     }
+    @Test
+    public void GivenMultipleRides_ShouldReturnTotalFare()
+    {
+        InvoiceGenerator invoiceGenerator = new InvoiceGenerator();
+        Rides[] rides = {new Rides(2.0, 5),
+                new Rides(0.1, 1)
+        };
+        double fare = invoiceGenerator.CalculateFare(rides);
+        double expected = 30;
+        Assertions.assertEquals(expected, fare);
+
+    }
 }
