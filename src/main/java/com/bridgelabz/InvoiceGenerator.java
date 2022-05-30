@@ -19,13 +19,22 @@ public class InvoiceGenerator {
         return totalFare;
     }
 
-    public double CalculateFare(Rides[] rides)
-    {
-        double totalFare = 0;
-        for (Rides ride :rides)
-        {
-            totalFare += this.CalculateFare(ride.distance, (int) ride.time);
+    public InvoiceSummary CalculateFare(Rides[] rides) {
+        double totalFare = 0.0;
+        for (Rides ride : rides) {
+            totalFare += this.CalculateFare(ride.distance , (int) ride.time);
         }
-        return totalFare;
+        return new InvoiceSummary(rides.length,totalFare);
+    }
+
+    //Invoice summary...
+    public InvoiceSummary invoiceSummary(Rides[] rides) {
+        double totalFare = 0.0;
+        for (Rides ride : rides) {
+            totalFare = totalFare + CalculateFare(ride.distance, (int) ride.time);
+        }
+        //    System.out.println(rides.length);
+        return new InvoiceSummary(rides.length, totalFare);
     }
 }
+
