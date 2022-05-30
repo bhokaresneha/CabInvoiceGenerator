@@ -3,11 +3,14 @@ package com.bridgelabz;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
+import java.util.List;
+
 public class InvoiceServiceTest {
-@Test
+    InvoiceGenerator invoiceGenerator = new InvoiceGenerator();
+
+    @Test
 public void GivenDistanceAndTime_ShouldReturnTotalFare()
     {
-        InvoiceGenerator invoiceGenerator = new InvoiceGenerator();
         double distance = 2.0;
         int time = 5;
         double fare = invoiceGenerator.CalculateFare(distance, time);
@@ -18,7 +21,6 @@ public void GivenDistanceAndTime_ShouldReturnTotalFare()
     @Test
     public void GivenLessDistanceAndTime_ShouldReturnMinFare()
     {
-        InvoiceGenerator invoiceGenerator = new InvoiceGenerator();
         double distance = 0.1;
         int time = 1;
         double fare = invoiceGenerator.CalculateFare(distance, time);
@@ -40,12 +42,25 @@ public void GivenDistanceAndTime_ShouldReturnTotalFare()
 
     @Test
     public void givenMultipleRide_ShouldReturnInvoiceSummary(){
-        InvoiceGenerator invoiceGerator = new InvoiceGenerator();
         Rides[] rides = {new Rides(2.0, 5),
                 new Rides(0.11,1)
         };
-        InvoiceSummary summary = invoiceGerator.CalculateFare(rides);
+        InvoiceSummary summary = invoiceGenerator.CalculateFare(rides);
         InvoiceSummary expectedInvoiceSummary = new InvoiceSummary(2, 30.0);
         Assertions.assertEquals(expectedInvoiceSummary,summary);
     }
+
+    @Test
+    public void GivenDistanceAndTimeForUserId_ShouldReturnTotalFare() {
+        InvoiceGenerator invoiceGerator = new InvoiceGenerator();
+        String userId = "Sneha";
+        Rides[] rides = {new Rides(2.0, 5),
+                new Rides(0.11, 1)
+        };
+        InvoiceServices.AddRide(userId, List.of(rides));
+        InvoiceSummary summary = invoiceGerator.CalculateFare(rides);
+        InvoiceSummary expectedInvoiceSummary = new InvoiceSummary(2, 30.0);
+        Assertions.assertEquals(expectedInvoiceSummary, summary);
+    }
+
 }
