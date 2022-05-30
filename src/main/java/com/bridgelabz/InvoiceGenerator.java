@@ -1,9 +1,10 @@
 package com.bridgelabz;
 
 public class InvoiceGenerator {
+    private String type;
     /*public static void main(String[] args) {
-        System.out.println("Welcome to Cab Invoice Generator");
-    }*/
+            System.out.println("Welcome to Cab Invoice Generator");
+        }*/
 
     private static int costPerTime = 1;
     private static double minimumCostPerKilometer = 10;
