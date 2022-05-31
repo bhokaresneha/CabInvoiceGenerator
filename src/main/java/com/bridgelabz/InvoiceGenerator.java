@@ -20,12 +20,12 @@ public class InvoiceGenerator {
         return totalFare;
     }
 
-    public InvoiceSummary CalculateFare(Rides[] rides) {
+    public double CalculateFare(Rides[] rides) {
         double totalFare = 0.0;
         for (Rides ride : rides) {
             totalFare += this.CalculateFare(ride.distance , (int) ride.time);
         }
-        return new InvoiceSummary(rides.length,totalFare);
+        return totalFare;
     }
 
     //Invoice summary...
