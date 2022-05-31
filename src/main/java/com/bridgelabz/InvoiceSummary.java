@@ -1,9 +1,9 @@
 package com.bridgelabz;
 
 public class InvoiceSummary {
-    private final int numOfRides;
-    private final double totalFare;
-    private final double avgOfFare;
+     final int numOfRides;
+    final double totalFare;
+     final double avgOfFare;
 
     public InvoiceSummary(int NoOfRides, double totalFare) {
         this.numOfRides = NoOfRides;

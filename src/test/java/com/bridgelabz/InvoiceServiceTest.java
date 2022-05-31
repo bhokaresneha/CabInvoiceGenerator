@@ -34,7 +34,7 @@ public void GivenDistanceAndTime_ShouldReturnTotalFare()
                 new Rides(0.1,1)
         };
         double fare = invoiceGenerator.CalculateFare(rides);
-        Assertions.assertEquals(30,fare,0.0);
+        Assertions.assertEquals(30,fare);
     }
 
     @Test
