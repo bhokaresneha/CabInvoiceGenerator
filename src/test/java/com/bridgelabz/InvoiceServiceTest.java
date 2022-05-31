@@ -4,10 +4,12 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 public class InvoiceServiceTest {
-@Test
+
+    InvoiceGenerator invoiceGenerator = new InvoiceGenerator();
+
+    @Test
 public void GivenDistanceAndTime_ShouldReturnTotalFare()
     {
-        InvoiceGenerator invoiceGenerator = new InvoiceGenerator();
         double distance = 2.0;
         int time = 5;
         double fare = invoiceGenerator.CalculateFare(distance, time);
@@ -18,25 +20,22 @@ public void GivenDistanceAndTime_ShouldReturnTotalFare()
     @Test
     public void GivenLessDistanceAndTime_ShouldReturnMinFare()
     {
-        InvoiceGenerator invoiceGenerator = new InvoiceGenerator();
         double distance = 0.1;
         int time = 1;
         double fare = invoiceGenerator.CalculateFare(distance, time);
         double expected = 5;
         Assertions.assertEquals(expected, fare);
     }
-   /* @Test
-    public void GivenMultipleRides_ShouldReturnTotalFare()
-    {
+    @Test
+
+    public void givenMultipleRides_shouldReturnTotalFare(){
         InvoiceGenerator invoiceGenerator = new InvoiceGenerator();
-        Rides[] rides = {new Rides(2.0, 5),
-                new Rides(0.1, 1)
+        Rides[] rides ={ new Rides(2.0, 5),
+                new Rides(0.1,1)
         };
         double fare = invoiceGenerator.CalculateFare(rides);
-        double expected = 30;
-        Assertions.assertEquals(expected, fare);
-
-    }*/
+        Assertions.assertEquals(30,fare,0.0);
+    }
 
     @Test
     public void givenMultipleRide_ShouldReturnInvoiceSummary(){
@@ -44,8 +43,26 @@ public void GivenDistanceAndTime_ShouldReturnTotalFare()
         Rides[] rides = {new Rides(2.0, 5),
                 new Rides(0.11,1)
         };
-        InvoiceSummary summary = invoiceGerator.CalculateFare(rides);
+        InvoiceSummary summary = invoiceGerator.invoiceSummary(rides);
         InvoiceSummary expectedInvoiceSummary = new InvoiceSummary(2, 30.0);
         Assertions.assertEquals(expectedInvoiceSummary,summary);
     }
+    @Test
+    public void GivenDistanceAndTimeNormal_ShouldReturnTotalFare() {
+
+        double distance = 2.0;
+        int time = 5;
+        double fare = RideType.CalculateFareNormal(distance, time);
+        Assertions.assertEquals(25, fare, 0.0);
+    }
+    @Test
+    public void GivenDistanceAndTimeForPremium_ShouldReturnTotalFare()
+    {
+        double distance = 2.0;
+        int time = 5;
+        double fare = RideType.CalculateFarePER(distance, time);
+        Assertions.assertEquals(40, fare,0.0);
+    }
+
+
 }
